@@ -1,0 +1,3 @@
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+const data=[{month:"Jun",count:18},{month:"Jul",count:22},{month:"Aug",count:25},{month:"Sep",count:29},{month:"Oct",count:32},{month:"Nov",count:36}];
+export default function EmployeeChart(){return <div className="chart"><ResponsiveContainer width="100%" height="100%"><BarChart data={data}><CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#edf0f5"/><XAxis dataKey="month" axisLine={false} tickLine={false}/><YAxis axisLine={false} tickLine={false}/><Tooltip/><Bar dataKey="count" fill="#6258e8" radius={[6,6,0,0]} /></BarChart></ResponsiveContainer></div>;}

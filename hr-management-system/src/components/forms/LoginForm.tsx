@@ -1,0 +1,5 @@
+import { useState, type FormEvent } from "react";
+import Button from "../common/Button";
+export default function LoginForm({onSubmit}:{onSubmit:(email:string,password:string)=>Promise<void>}){const[email,setEmail]=useState("admin@peopleflow.com");const[password,setPassword]=useState("admin123");const[error,setError]=useState("");const[busy,setBusy]=useState(false);
+async function submit(e:FormEvent){e.preventDefault();setError("");setBusy(true);try{await onSubmit(email,password);}catch(err){setError(err instanceof Error?err.message:"Unable to sign in");}finally{setBusy(false);}}
+return <form onSubmit={submit} className="form-stack"><label>Email address<input type="email" required value={email} onChange={e=>setEmail(e.target.value)}/></label><label>Password<input type="password" required minLength={4} value={password} onChange={e=>setPassword(e.target.value)}/></label>{error&&<p className="error-text">{error}</p>}<Button type="submit" disabled={busy}>{busy?"Signing in…":"Sign in to workspace"}</Button><p className="hint">Demo: use the pre-filled credentials or any valid email and 4+ character password.</p></form>;}

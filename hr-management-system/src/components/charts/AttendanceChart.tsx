@@ -1,0 +1,3 @@
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+const data=[{name:"Present",value:78},{name:"Late",value:12},{name:"Absent",value:10}];const colors=["#6258e8","#f5a623","#e66b75"];
+export default function AttendanceChart(){return <div className="donut"><ResponsiveContainer width="100%" height="100%"><PieChart><Pie data={data} dataKey="value" nameKey="name" innerRadius={52} outerRadius={76} paddingAngle={4}>{data.map((d,i)=><Cell key={d.name} fill={colors[i]}/>)}</Pie><Tooltip/></PieChart></ResponsiveContainer><div className="donut-center"><strong>78%</strong><small>Present</small></div></div>;}

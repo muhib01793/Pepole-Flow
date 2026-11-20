@@ -1,0 +1,3 @@
+import { Bell, Search } from "lucide-react";
+import { useAppSelector } from "../../app/hooks";
+export default function Navbar(){const user=useAppSelector(s=>s.auth.user);return <header className="topbar"><div className="mobile-brand">PeopleFlow</div><div className="searchbox"><Search size={17}/><input placeholder="Search anything…" aria-label="Search"/></div><div className="top-actions"><button className="icon-btn" aria-label="Notifications"><Bell size={19}/></button><div className="avatar">{user?.name?.[0]||"A"}</div><div><strong>{user?.name||"Admin"}</strong><small>{user?.role||"Administrator"}</small></div></div></header>;}

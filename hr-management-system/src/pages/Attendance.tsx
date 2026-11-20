@@ -1,0 +1,7 @@
+import { useAppSelector,useAppDispatch } from "../app/hooks";
+import DataTable from "../components/tables/DataTable";
+import Button from "../components/common/Button";
+import { addAttendance } from "../features/attendance/attendanceSlice";
+import { makeId } from "../utils/helpers";
+export default function Attendance(){const rows=useAppSelector(s=>s.attendance);const employees=useAppSelector(s=>s.employees);const dispatch=useAppDispatch();function checkIn(){const employee=employees[0];if(!employee)return alert("Add an employee first.");const now=new Date();const time=now.toTimeString().slice(0,5);dispatch(addAttendance({id:makeId("AT"),employee:employee.name,date:now.toISOString().slice(0,10),checkIn:time,checkOut:"",status:time>"09:15"?"Late":"Present"}));}
+return <><div className="page-heading"><div><p className="eyebrow">TIME & ATTENDANCE</p><h1>Attendance</h1><p className="muted">Track daily attendance and working hours.</p></div><Button onClick={checkIn}>＋ Record check-in</Button></div><section className="panel"><div className="panel-heading"><div><h2>Attendance records</h2><p className="muted">Recent attendance activity</p></div></div><DataTable headers={["Employee","Date","Check in","Check out","Status"]}>{rows.map(r=><tr key={r.id}><td><strong>{r.employee}</strong></td><td>{r.date}</td><td>{r.checkIn||"—"}</td><td>{r.checkOut||"—"}</td><td><span className={`status ${r.status==="Present"?"success":"warning"}`}>{r.status}</span></td></tr>)}</DataTable></section></>;}
